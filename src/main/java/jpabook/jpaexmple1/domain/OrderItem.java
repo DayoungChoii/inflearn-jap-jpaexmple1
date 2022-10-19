@@ -3,6 +3,7 @@ package jpabook.jpaexmple1.domain;
 import jpabook.jpaexmple1.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 
@@ -25,6 +26,18 @@ public class OrderItem {
     private int orderPrice; //주문 가격
     private int count; //주문 수량
 
+    //생성 메서드
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+
     //비지니스 로직
 
     /**
@@ -35,7 +48,7 @@ public class OrderItem {
     }
 
     /**
-     * 주문상품 전체 가격 조회
+     * 문상품 전체 가격 조회
      * @return
      */
     public int getTotalPrice() {
