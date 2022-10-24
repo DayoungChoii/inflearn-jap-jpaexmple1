@@ -13,7 +13,7 @@ public class OrderRepository {
     final private EntityManager em;
 
     public void save(Order order) {
-        em.persist(em);
+        em.persist(order);
     }
 
     public Order findOne(Long id){
