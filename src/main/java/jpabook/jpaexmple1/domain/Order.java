@@ -1,5 +1,6 @@
 package jpabook.jpaexmple1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class Order {
     private Member member;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
