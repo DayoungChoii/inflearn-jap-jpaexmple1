@@ -48,6 +48,19 @@ public class OrderApiController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * V3. 엔티티를 조회해서 DTO로 변환(fetch join 사용O)
+     * - 페이징 시에는 N 부분을 포기해야함
+     *
+     */
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> orderV3() {
+        List<Order> all = orderRepository.findAllWithItem();
+        return all.stream()
+                .map(o -> new OrderDto(o))
+                .collect(Collectors.toList());
+    }
+
     @Data
     static class OrderDto {
 
